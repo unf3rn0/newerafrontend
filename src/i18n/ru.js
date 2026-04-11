@@ -191,8 +191,7 @@ export const ru = {
   'footer.brand': 'Newera',
   'footer.tagline': 'Традиционная таджикская мода',
   'footer.contact': 'Контакты',
-  'footer.email': 'Email: info@newera.tj',
-  'footer.phone': 'Телефон: +992 XXX XXX XXX',
+  'footer.phone': 'Телефон: +992886870110',
   'footer.follow': 'Подписывайтесь',
   'footer.rights': '© 2025 Newera. Все права защищены.',
 }

@@ -191,8 +191,7 @@ export const tj = {
   'footer.brand': 'Newera',
   'footer.tagline': 'Мӯди анъанавии тоҷикӣ',
   'footer.contact': 'Тамос',
-  'footer.email': 'Email: info@newera.tj',
-  'footer.phone': 'Телефон: +992 XXX XXX XXX',
+  'footer.phone': 'Телефон: +992886870110',
   'footer.follow': 'Пайравӣ кунед',
   'footer.rights': '© 2025 Newera. Ҳамаи ҳуқуқҳо ҳифз шудаанд.',
 }

@@ -191,8 +191,7 @@ export const en = {
   'footer.brand': 'Newera',
   'footer.tagline': 'Traditional Tajik Fashion',
   'footer.contact': 'Contact',
-  'footer.email': 'Email: info@newera.tj',
-  'footer.phone': 'Phone: +992 XXX XXX XXX',
+  'footer.phone': 'Phone: +992886870110',
   'footer.follow': 'Follow Us',
   'footer.rights': '© 2025 Newera. All rights reserved.',
 }

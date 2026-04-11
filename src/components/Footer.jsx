@@ -14,7 +14,6 @@ const Footer = () => {
           </div>
           <div className="footer-section">
             <h4>{t('footer.contact')}</h4>
-            <p>{t('footer.email')}</p>
             <p>{t('footer.phone')}</p>
           </div>
           <div className="footer-section">
@@ -23,7 +22,7 @@ const Footer = () => {
               <a href="https://facebook.com/newera" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <FacebookIcon size={24} />
               </a>
-              <a href="https://instagram.com/newera" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/newerafashionhouse" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <InstagramIcon size={24} />
               </a>
               <a href="https://tiktok.com/@newera" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
@@ -41,4 +40,3 @@ const Footer = () => {
 }
 
 export default Footer
-
