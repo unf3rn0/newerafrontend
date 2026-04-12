@@ -52,7 +52,8 @@ const Cart = () => {
         description: `Order #${order.id}`,
         email: user.email,
         language: user.preferred_language || 'ru',
-        phone: payerPhone
+        phone: payerPhone,
+        return_url: `${window.location.origin}/payment/success`,
       }
 
       const paymentResponse = await paymentAPI.createPayment(paymentData)
