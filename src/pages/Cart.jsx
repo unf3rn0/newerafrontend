@@ -5,7 +5,6 @@ import { useAuth } from '../contexts/AuthContext'
 import { useToast } from '../contexts/ToastContext'
 import { useI18n } from '../contexts/I18nContext'
 import { ordersAPI, paymentAPI } from '../services/api'
-import PaymentMethodSelector from '../components/PaymentMethodSelector'
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, clearCart, getTotal } = useCart()
@@ -13,7 +12,6 @@ const Cart = () => {
   const { success, error } = useToast()
   const { t } = useI18n()
   const navigate = useNavigate()
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null)
   const [payerPhone, setPayerPhone] = useState('')
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -23,12 +21,7 @@ const Cart = () => {
       return
     }
 
-    if (!selectedPaymentMethod) {
-      error(t('payment.select_method'))
-      return
-    }
-
-    if (selectedPaymentMethod.code === 'alif' && !payerPhone.trim()) {
+    if (!payerPhone.trim()) {
       error(t('payment.phone_required'))
       return
     }
@@ -44,8 +37,7 @@ const Cart = () => {
           price: item.discount_percentage > 0
             ? item.price * (1 - item.discount_percentage / 100)
             : item.price
-        })),
-        payment_method_id: selectedPaymentMethod.id
+        }))
       }
 
       const orderResponse = await ordersAPI.create(orderData)
@@ -54,13 +46,13 @@ const Cart = () => {
       // Create payment
       const paymentData = {
         order_id: order.id,
-        payment_method_code: selectedPaymentMethod.code,
+        payment_method_code: 'alif',
         amount: order.total_amount,
-        currency: selectedPaymentMethod.code === 'alif' ? 'TJS' : 'RUB',
+        currency: 'TJS',
         description: `Order #${order.id}`,
         email: user.email,
         language: user.preferred_language || 'ru',
-        phone: selectedPaymentMethod.code === 'alif' ? payerPhone : undefined
+        phone: payerPhone
       }
 
       const paymentResponse = await paymentAPI.createPayment(paymentData)
@@ -167,32 +159,30 @@ const Cart = () => {
             </div>
 
             <div className="payment-method-section" style={{ marginTop: '20px', marginBottom: '20px' }}>
-              <PaymentMethodSelector
-                value={selectedPaymentMethod?.id || null}
-                onChange={setSelectedPaymentMethod}
+              <label>{t('payment.method')}</label>
+              <input
+                type="text"
+                className="form-control"
+                value="ALIF"
+                disabled
+                style={{ marginBottom: '12px' }}
+              />
+              <label htmlFor="payer-phone">{t('payment.phone_label')}</label>
+              <input
+                id="payer-phone"
+                type="tel"
+                className="form-control"
+                placeholder={t('payment.phone_placeholder')}
+                value={payerPhone}
+                onChange={(e) => setPayerPhone(e.target.value)}
                 disabled={isProcessing}
               />
-
-              {selectedPaymentMethod?.code === 'alif' && (
-                <div style={{ marginTop: '12px' }}>
-                  <label htmlFor="payer-phone">{t('payment.phone_label')}</label>
-                  <input
-                    id="payer-phone"
-                    type="tel"
-                    className="form-control"
-                    placeholder={t('payment.phone_placeholder')}
-                    value={payerPhone}
-                    onChange={(e) => setPayerPhone(e.target.value)}
-                    disabled={isProcessing}
-                  />
-                </div>
-              )}
             </div>
 
             <button
               onClick={handleCheckout}
               className="btn btn-primary btn-lg btn-block"
-              disabled={isProcessing || !selectedPaymentMethod}
+              disabled={isProcessing || !payerPhone.trim()}
             >
               {isProcessing ? t('payment.processing') : t('cart.checkout')}
             </button>
