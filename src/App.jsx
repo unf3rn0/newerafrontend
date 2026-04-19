@@ -15,6 +15,7 @@ import Profile from './pages/Profile'
 import Admin from './pages/Admin'
 import PaymentSuccess from './pages/PaymentSuccess'
 import PaymentFailure from './pages/PaymentFailure'
+import PaymentQR from './pages/PaymentQR'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/payment/qr" element={<PaymentQR />} />
                     <Route path="/payment/success" element={<PaymentSuccess />} />
                     <Route path="/payment/failure" element={<PaymentFailure />} />
                     <Route
@@ -71,4 +73,3 @@ function App() {
 }
 
 export default App
-

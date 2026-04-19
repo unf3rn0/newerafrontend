@@ -4,7 +4,7 @@ import { useCart } from '../contexts/CartContext'
 import { useAuth } from '../contexts/AuthContext'
 import { useToast } from '../contexts/ToastContext'
 import { useI18n } from '../contexts/I18nContext'
-import { ordersAPI, paymentAPI } from '../services/api'
+import { ordersAPI } from '../services/api'
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, clearCart, getTotal } = useCart()
@@ -12,7 +12,6 @@ const Cart = () => {
   const { success, error } = useToast()
   const { t } = useI18n()
   const navigate = useNavigate()
-  const [payerPhone, setPayerPhone] = useState('')
   const [isProcessing, setIsProcessing] = useState(false)
 
   const handleCheckout = async () => {
@@ -21,15 +20,9 @@ const Cart = () => {
       return
     }
 
-    if (!payerPhone.trim()) {
-      error(t('payment.phone_required'))
-      return
-    }
-
     setIsProcessing(true)
 
     try {
-      // Create order
       const orderData = {
         items: cart.map(item => ({
           product_id: item.id,
@@ -43,33 +36,9 @@ const Cart = () => {
       const orderResponse = await ordersAPI.create(orderData)
       const order = orderResponse.data
 
-      // Create payment
-      const paymentData = {
-        order_id: order.id,
-        payment_method_code: 'alif',
-        amount: order.total_amount,
-        currency: 'TJS',
-        description: `Order #${order.id}`,
-        email: user.email,
-        language: user.preferred_language || 'ru',
-        phone: payerPhone,
-        return_url: `${window.location.origin}/payment/success`,
-      }
-
-      const paymentResponse = await paymentAPI.createPayment(paymentData)
-      const payment = paymentResponse.data
-
-      if (payment.success && payment.payment_url) {
-        // Clear cart and redirect to payment page
-        clearCart()
-        success(t('payment.redirect'))
-
-        // Redirect to payment URL
-        window.location.href = payment.payment_url
-      } else {
-        error(payment.message || t('payment.creation_failed'))
-        setIsProcessing(false)
-      }
+      clearCart()
+      success(t('payment.qr_order_created'))
+      navigate(`/payment/qr?order_id=${order.id}&amount=${order.total_amount}&currency=TJS`)
     } catch (err) {
       error(t('cart.order_failed'))
       console.error(err)
@@ -164,26 +133,17 @@ const Cart = () => {
               <input
                 type="text"
                 className="form-control"
-                value="ALIF"
+                value={t('payment.qr_method')}
                 disabled
                 style={{ marginBottom: '12px' }}
               />
-              <label htmlFor="payer-phone">{t('payment.phone_label')}</label>
-              <input
-                id="payer-phone"
-                type="tel"
-                className="form-control"
-                placeholder={t('payment.phone_placeholder')}
-                value={payerPhone}
-                onChange={(e) => setPayerPhone(e.target.value)}
-                disabled={isProcessing}
-              />
+              <p className="payment-method-help">{t('payment.qr_hint')}</p>
             </div>
 
             <button
               onClick={handleCheckout}
               className="btn btn-primary btn-lg btn-block"
-              disabled={isProcessing || !payerPhone.trim()}
+              disabled={isProcessing}
             >
               {isProcessing ? t('payment.processing') : t('cart.checkout')}
             </button>

@@ -721,6 +721,12 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 16px;
 }
 
+.payment-method-help {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .auth-link {
   text-align: center;
   margin-top: 20px;
@@ -820,6 +826,108 @@ h1, h2, h3, h4, h5, h6 {
 
 .order-details p {
   margin-bottom: 8px;
+}
+
+.payment-result-page {
+  padding: 40px 0;
+}
+
+.payment-result {
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 40px;
+}
+
+.qr-payment-card {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.qr-payment-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.qr-payment-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.12);
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.qr-payment-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.qr-payment-preview {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.qr-payment-image {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  border-radius: var(--radius-sm);
+}
+
+.qr-payment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.qr-payment-order,
+.qr-payment-amount-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  background: #f8fafc;
+  border: 1px solid var(--border);
+}
+
+.qr-payment-order strong,
+.qr-payment-amount-box strong {
+  font-size: 30px;
+  color: var(--primary-color);
+}
+
+.qr-payment-note {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.qr-contact-card {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  background: rgba(14, 165, 233, 0.06);
+  padding: 24px;
+}
+
+.qr-contact-card h2 {
+  margin-bottom: 10px;
+}
+
+.qr-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
 }
 
 /* Admin */
@@ -1122,5 +1230,21 @@ h1, h2, h3, h4, h5, h6 {
   .cart-item {
     flex-direction: column;
   }
-}
 
+  .payment-result {
+    padding: 24px;
+  }
+
+  .qr-payment-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .qr-payment-order strong,
+  .qr-payment-amount-box strong {
+    font-size: 24px;
+  }
+
+  .qr-contact-actions {
+    flex-direction: column;
+  }
+}
