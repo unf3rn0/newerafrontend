@@ -87,7 +87,7 @@ export const ru = {
   'profile.filter_all': 'Все',
   'profile.filter_apply': 'Применить фильтры',
   'profile.filter_clear': 'Очистить',
-  'profile.status.pending': 'В ожидании',
+  'profile.status.pending': 'Завершён',
   'profile.status.completed': 'Завершён',
   'profile.status.cancelled': 'Отменён',
   'profile.showing_orders': 'Показано {from}-{to} из {total} заказов',

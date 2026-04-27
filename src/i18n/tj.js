@@ -87,7 +87,7 @@ export const tj = {
   'profile.filter_all': 'Ҳама',
   'profile.filter_apply': 'Татбиқ кардани филтрҳо',
   'profile.filter_clear': 'Тоза кардан',
-  'profile.status.pending': 'Дар интизорӣ',
+  'profile.status.pending': 'Анҷом ёфт',
   'profile.status.completed': 'Анҷом ёфт',
   'profile.status.cancelled': 'Бекор карда шуд',
   'profile.showing_orders': 'Нишон дода шудааст {from}-{to} аз {total} фармоишҳо',

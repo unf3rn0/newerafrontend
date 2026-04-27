@@ -87,7 +87,7 @@ export const en = {
   'profile.filter_all': 'All',
   'profile.filter_apply': 'Apply Filters',
   'profile.filter_clear': 'Clear',
-  'profile.status.pending': 'Pending',
+  'profile.status.pending': 'Completed',
   'profile.status.completed': 'Completed',
   'profile.status.cancelled': 'Cancelled',
   'profile.showing_orders': 'Showing {from}-{to} of {total} orders',
